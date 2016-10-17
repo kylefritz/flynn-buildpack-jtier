@@ -1,4 +1,7 @@
+#!/bin/sh
+
+export HI=kyle
 
 # jtier apps really need this directory :)
-mkdir ~/logs
-mkdir -p ~/groupon/jtier/logs
+mkdir /app/logs
+mkdir -p /app/groupon/jtier/logs
