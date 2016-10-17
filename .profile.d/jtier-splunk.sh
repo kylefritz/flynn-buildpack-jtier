@@ -1,3 +1,5 @@
+#!/bin/sh
+
 cd ~/vendor/splunkforwarder/bin/
 ./splunk start --accept-license
 touch ~/$SPLUNK_LOG_FILE
