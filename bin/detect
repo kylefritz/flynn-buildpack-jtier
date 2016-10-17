@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "jTier App Detected"
+exit 0
