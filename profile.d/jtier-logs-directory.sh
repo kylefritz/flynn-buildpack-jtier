@@ -1,3 +1,4 @@
 
 # jtier apps really need this directory :)
-mkdir -p /var/groupon/jtier/logs
+mkdir ~/logs
+mkdir -p ~/groupon/jtier/logs

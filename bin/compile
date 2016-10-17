@@ -7,15 +7,17 @@ indent() {
 BUILD_DIR=$1
 CACHE_DIR=$2
 
-echo "-----> Downloading splunk agent"
-
+echo "-----> Splunk"
 cd $CACHE_DIR
-wget -nv -O splunkforwarder.tgz "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.5.0&product=universalforwarder&filename=splunkforwarder-6.5.0-59c8927def0f-Linux-x86_64.tgz&wget=true"
-tar -xf ./splunkforwarder.tgz
+if [ ! -d "splunkforwarder" ]; then
+  echo "       Downloading agent"
+  wget -nv -O splunkforwarder.tgz "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.5.0&product=universalforwarder&filename=splunkforwarder-6.5.0-59c8927def0f-Linux-x86_64.tgz&wget=true"
+  tar -xf ./splunkforwarder.tgz
+fi
 
 echo "Adding agent to build directory"
-mkdir -p "$BUILD_DIR/opt"
-cp -r splunkforwarder "$BUILD_DIR/opt"
+mkdir -p "$BUILD_DIR/vendor/splunkforwarder"
+cp -r ./splunkforwarder/* "$BUILD_DIR/vendor/splunkforwarder"
 
 echo "-----> TODO: do something to setup metrics..."
 
