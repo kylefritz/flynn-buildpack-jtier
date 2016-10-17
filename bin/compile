@@ -10,11 +10,15 @@ CACHE_DIR=$2
 
 echo "-----> Downloading splunk agent"
 cd $CACHE_DIR
-wget -O splunkforwarder.tgz "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.5.0&product=universalforwarder&filename=splunkforwarder-6.5.0-59c8927def0f-Linux-x86_64.tgz&wget=true"
+echo $CACHE_DIR
+
+curl "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.5.0&product=universalforwarder&filename=splunkforwarder-6.5.0-59c8927def0f-Linux-x86_64.tgz&wget=true" > splunkforwarder.tgz
 tar -xf splunkforwarder.tgz
 
 echo "Adding agent to build directory" | indent
 mkdir -p "$BUILD_DIR/opt"
+pwd
+ls
 cp splunkforwarder "$BUILD_DIR/opt"
 
 echo "-----> Doing something to setup metrics"
