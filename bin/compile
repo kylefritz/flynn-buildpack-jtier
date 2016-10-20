@@ -1,13 +1,9 @@
 #!/bin/sh
 
-indent() {
-  sed -u 's/^/       /'
-}
-
 BUILD_DIR=$1
 CACHE_DIR=$2
 
-echo "-----> Splunk"
+echo "-----> Splunk Universal Forwarder"
 cd $CACHE_DIR
 if [ ! -d "splunkforwarder" ]; then
   echo "       Downloading agent"
@@ -15,10 +11,8 @@ if [ ! -d "splunkforwarder" ]; then
   tar -xf ./splunkforwarder.tgz
 fi
 
-echo "Adding agent to build directory"
+echo "       Adding agent to build/vendor directory"
 mkdir -p "$BUILD_DIR/vendor/splunkforwarder"
 cp -r ./splunkforwarder/* "$BUILD_DIR/vendor/splunkforwarder"
 
-echo "-----> TODO: do something to setup metrics..."
-
-echo "-----> Happy jTiering"
+echo "-----> Happy Splunking"

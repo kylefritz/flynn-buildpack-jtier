@@ -1,10 +1,23 @@
-# Flynn/Heroku Buildpack for jTier app
+# Splunk Universal Forwarder Heroku Buildpack
 
-1. Make jTier required directories
-1. Install & Configure Splunk Agent
-1. Install & Configure Java Metrics
+1. Install Splunk Universal Forwarder
 
-## Environment Variables
+## what to do
 
-    $ flynn env set SPLUNK_LOG_FILE=splunk-log 
-    $ flynn env set SPLUNK_INDEXER=splunk-staging-indexers.snc1:9997
+  #!/bin/sh
+
+  export BYE=kyle
+
+  export PATH=$PATH:/app/vendor/splunkforwarder/bin
+  export SPLUNK_HOME=vendor/splunkforwarder
+
+  SPLUNK_LOG_FILE=splunk-log 
+  SPLUNK_INDEXER=splunk-staging-indexers.snc1:9997
+
+  cd /app/vendor/splunkforwarder/bin/
+  ./splunk start --accept-license
+  touch /app/$SPLUNK_LOG_FILE
+  ./splunk add forward-server $SPLUNK_INDEXER -auth admin:changeme
+  ./splunk add monitor /app/$SPLUNK_LOG_FILE  -auth admin:changeme
+  echo "goapi_jtier_splunk_agent_started" >> /app/splunk-log
+
