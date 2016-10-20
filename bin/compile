@@ -4,6 +4,11 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 echo "-----> Splunk Universal Forwarder"
+
+echo "       Adding splunk to PATH"
+mkdir -p $BUILD_DIR/.profile.d
+cp ./splunk-forwarder-path.sh $BUILD_DIR/.profile.d
+
 cd $CACHE_DIR
 if [ ! -d "splunkforwarder" ]; then
   echo "       Downloading agent"
